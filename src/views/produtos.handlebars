@@ -1,0 +1,14 @@
+<h3>registrar novo produto</h3>
+<form action="/produtos" method="POST">
+
+  {{#if error}}
+    <p style="color: greenyellow;">produto regitrado com sucess</p>
+  {{/if}}
+  <div class="d-flex" style="gap: 30px; margin: 30px 0px">
+    <input type="text" name="nome" placeholder="nome do produto" class="form-control">
+    <input type="number" name="preco" placeholder="preço" class="form-control">
+    <input type="number" name="quantidade" placeholder="quantidade" class="form-control">
+  </div>
+
+  <button type="submit" class="site-btn">REGISTRAR</button>
+</form>

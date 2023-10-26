@@ -1,0 +1,28 @@
+{
+  "name": "proj-db-partii-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "consign": "^0.1.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "form-urlencoded": "^6.1.4",
+    "jsbarcode": "^3.11.5",
+    "mysql2": "^3.6.2",
+    "node-postgres": "^0.6.2",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
