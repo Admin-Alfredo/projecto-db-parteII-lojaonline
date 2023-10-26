@@ -7,8 +7,10 @@
 
 ### instalação
 <pre>
-	git clone https://github.com/Admin-Alfredo/projecto-db-parteII-lojaonline.git
-	cd projecto-db-parteII-lojaonline
-	npm install
-	npm start ou npm run dev
+	1. git clone https://github.com/Admin-Alfredo/projecto-db-parteII-lojaonline.git
+	2. cd projecto-db-parteII-lojaonline
+	3. npm install
+	4. npm start ou npm run dev
+	5. Acessa o link http://localhost:3000/admin no navegador para acessar o painel adminstrativo;
+	6. Acessa o link http://localhost:3000 no navegador para acessar a loja online;
 </pre>
