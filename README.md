@@ -1,4 +1,4 @@
-## LOJA ONLINE DE BASE DE DADOS
+## LOJA ONLINE - PROJECTO DE BASE DE DADOS I
 ### pre-requesitos
 
 - `nodejs >= 16.x` instalado
