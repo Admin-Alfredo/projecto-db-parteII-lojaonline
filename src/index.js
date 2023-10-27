@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
 
-database().then(connction => {
+database().then(connction => {  
 
   consign({ cwd: path.join(process.cwd(), '/src') })
     .then('models')

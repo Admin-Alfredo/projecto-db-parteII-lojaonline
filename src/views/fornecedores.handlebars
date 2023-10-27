@@ -1,0 +1,86 @@
+<h3>Registrar novo fornecedor</h3>
+<form action="/admin/fornecedores" method="POST">
+
+  <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
+      municipio, bairro, rua, numero de casa</strong></p>
+  <div class="d-flex" style="gap: 30px; margin: 30px 0px">
+    <input required type="text" name="nome" placeholder="nome do produto" class="form-control fornecedor-field-ckeck">
+    <input required type="text" name="NIF" placeholder="NIF" class="form-control fornecedor-field-ckeck" />
+    <input type="text" name="endereco" placeholder="pais, provincia, municipio, bairro, rua, numero de casa"
+      class="form-control w-100 fornecedor-field-ckeck">
+  </div>
+  <h4>Definir contrato para fornecedor</h4>
+  <label style="cursor:pointer;"> <span class="pr-2">usar fornecedor existente</span><input type="checkbox"
+      id="check-fornecedor"></label>
+  <p class="mt-2 p-2 alert alert-warning" role="alert"> Descrição -> Fornecedor -> Produto -> Armazen</strong></p>
+
+  <div class="d-flex" style="gap: 30px; margin: 30px 0px">
+    <input required type="text" name="c_descricao" placeholder="descrição do contrato" class="form-control">
+    <select name="c_fornecedor" class="select-forneceodr">
+      {{#each fornecedores}}
+      <option value="{{this.id}}">{{this.nome}}</option>
+      {{/each}}
+    </select>
+    <select name="c_produto">
+      {{#each produtos}}
+      <option value="{{this.id}}">{{this.nome}}</option>
+      {{/each}}
+    </select>
+    <select name="c_armazen">
+      {{#each armazens}}
+      <option value="{{this.id}}">{{this.nome}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+
+
+  <button type="submit" class="site-btn">REGISTRAR</button>
+</form>
+<div style="margin-top: 30px;">
+
+  <h3>Lista de produtos</h3>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">NIF</th>
+        <th scope="col">acções</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each fornecedores}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.nome}}</td>
+        <td>{{this.NIF}} Kzs</td>
+        <td>
+          <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>
+<script>
+  document.querySelector('#check-fornecedor')?.addEventListener('change', function (e) {
+    const fornFiledsCheck = document.querySelectorAll('.fornecedor-field-ckeck')
+    const selectForn = document.querySelector('.select-forneceodr')
+    console.log(selectForn)
+    const currentTarget = e.currentTarget
+    if (currentTarget.checked) {
+      fornFiledsCheck.forEach((ffc) => ffc.setAttribute('disabled', 'true'))
+      selectForn.removeAttribute('disabled')
+    } else {
+      fornFiledsCheck.forEach((ffc) => ffc.removeAttribute('disabled'))
+      selectForn.setAttribute('disabled', 'true')
+    }
+  });
+
+</script>

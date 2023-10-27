@@ -1,0 +1,53 @@
+<h3>Registrar novo Armazen</h3>
+<form action="/admin/armazens" method="POST">
+  <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
+      municipio, bairro, rua, numero de casa</strong></p>
+  <div class="d-flex" style="gap: 30px; margin: 30px 0px">
+    <input required type="text" name="nome" placeholder="nome do armazen" class="form-control">
+    <input type="number" name="capacidadearmazenamento" placeholder="capacidade armazenamento" class="form-control">
+
+    <input type="text" name="endereco" placeholder="pais, provincia, municipio, bairro, rua, numero de casa"
+      class="form-control w-100">
+
+  </div>
+
+  <button type="submit" class="site-btn">REGISTRAR</button>
+</form>
+<div style="margin-top: 30px;">
+
+  <h3>Lista de produtos</h3>
+  <br>
+  {{!-- id bigserial primary key ,
+  nome varchar(45) not null,
+  capacidadeArmazenamento int,
+  enderecoID int not null,
+  constraint fk_endereco foreign key (enderecoID) references endereco(id) --}}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Armazenamento</th>
+        <th scope="col">Endereço</th>
+        <th scope="col">acções</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each armazens}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.nome}}</td>
+        <td>{{this.capacidadeArmazenamento}} Kzs</td>
+        <td>{{this.provincia}}, {{this.municipio}}</td>
+        <td>
+          <a href="/admin/armazens/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>

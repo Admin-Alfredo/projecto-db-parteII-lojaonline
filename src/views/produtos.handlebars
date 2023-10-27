@@ -1,9 +1,6 @@
 <h3>Registrar novo produto</h3>
 <form action="/admin/produtos" method="POST">
 
-  {{#if message}}
-  <p style="color: greenyellow;">{{message}}</p>
-  {{/if}}
   <div class="d-flex" style="gap: 30px; margin: 30px 0px">
     <input required type="text" name="nome" placeholder="nome do produto" class="form-control">
     <input required type="number" name="preco" placeholder="preço" class="form-control">

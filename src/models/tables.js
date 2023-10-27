@@ -4,7 +4,7 @@ module.exports = async (app, con) => {
 
     await con.query(
       `CREATE TABLE IF NOT EXISTS endereco (
-        id bigserial primary key ,
+        id VARCHAR(50) primary key ,
         pais varchar(55) default 'Angola',
         provincia varchar(30),
         municipio varchar(30),
@@ -20,7 +20,7 @@ module.exports = async (app, con) => {
         nome varchar(45) NOT NULL,
         email varchar(100) UNIQUE,
         telefone INT,
-        enderecoID bigserial NOT NULL,
+        enderecoID VARCHAR(50) NOT NULL,
         constraint fk_endereco foreign key (enderecoID) references endereco(id)
       )`
     )
@@ -38,9 +38,9 @@ module.exports = async (app, con) => {
 
     await con.query(
       `CREATE TABLE IF NOT EXISTS produto (
-        id bigserial primary key,
+        id VARCHAR(50) primary key,
         nome varchar(45) not null UNIQUE,
-        preco float NOT NULL default 0,
+        preco float default 0,
         quantidade INT default 0
       )`
     )
@@ -49,7 +49,7 @@ module.exports = async (app, con) => {
     await con.query(
       `CREATE TABLE IF NOT EXISTS itemencomendado (
         id bigserial primary key ,
-        produtoID bigserial NOT NULL,
+        produtoID VARCHAR(50) NOT NULL,
         encomendaID bigserial NOT NULL,
         quantidade INT default 0,
         constraint fk_produto foreign key (produtoID) references produto(id),
@@ -107,7 +107,7 @@ module.exports = async (app, con) => {
       `CREATE TABLE IF NOT EXISTS fornecedor (
         id bigserial primary key ,
         nome varchar(45) not null,
-        enderecoID int not null,
+        enderecoID VARCHAR(50) not null,
         NIF varchar(45),
         constraint fk_endereco foreign key (enderecoID) references endereco(id)
       )`
@@ -118,9 +118,9 @@ module.exports = async (app, con) => {
     await con.query(
       `CREATE TABLE IF NOT EXISTS armazen (
         id bigserial primary key ,
-        nome varchar(45) not null,
+        nome varchar(45) not null UNIQUE,
         capacidadeArmazenamento int,
-        enderecoID int not null,
+        enderecoID VARCHAR(50) not null,
         constraint fk_endereco foreign key (enderecoID) references endereco(id)
       )`
     )
@@ -132,7 +132,7 @@ module.exports = async (app, con) => {
         descricao text,
         data date default CURRENT_DATE,
         fornecedorID bigserial not null,
-        produtoID bigserial not null,
+        produtoID VARCHAR(50) not null,
         armazenID bigserial not null,
         constraint fk_fornecedor foreign key (fornecedorID) references fornecedor(id),
         constraint fk_produto foreign key (produtoID) references produto(id),
@@ -163,7 +163,7 @@ module.exports = async (app, con) => {
         id bigserial primary key ,
         nome varchar(45) not null,
         gerente int,
-        enderecoID int,
+        enderecoID VARCHAR(50),
         constraint fk_gerente foreign key (gerente) references empregado(id),
         constraint fk_endereco foreign key (enderecoID) references endereco(id)
       )`
@@ -177,7 +177,7 @@ module.exports = async (app, con) => {
         data date default CURRENT_TIMESTAMP,
         clienteID bigserial not null,
         constraint fk_cliente foreign key (clienteID) references cliente(id),
-        constraint fk_pagamento foreign key (metodopagamentoID) references endereco(id)
+        constraint fk_pagamento foreign key (metodopagamentoID) references pagamento(id)
 
       )`
     )
