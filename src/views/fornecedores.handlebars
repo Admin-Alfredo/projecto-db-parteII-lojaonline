@@ -1,5 +1,5 @@
 <h3>Registrar novo fornecedor</h3>
-<form action="/admin/fornecedores" method="POST" id="f-form">
+<form action="/clientes" method="POST" id="f-form">
 
   <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
       municipio, bairro, rua, numero de casa</strong></p>
@@ -39,7 +39,39 @@
 </form>
 <div style="margin-top: 30px;">
 
-  <h3>Lista dos fornecedores</h3>
+  <h3>Lista de fornecedor</h3>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">NIF</th>
+        <th scope="col">acções</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each fornecedores}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.nome}}</td>
+        <td>{{this.nif}}</td>
+        <td>
+          <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top: 30px;">
+
+  <h3>Lista dos contratos</h3>
   <br>
   <table class="table table-striped">
     <thead>
@@ -57,12 +89,13 @@
       {{#each contratos}}
       <tr>
         <th scope="row">{{this.id}}</th>
+        <td>{{this.descricao}}</td>
         <td>{{this.data}}</td>
-        <td>{{this.fornecedor}}</td>
-        <td>{{this.produto}}</td>
-        <td>{{this.armazen}}</td>
+        <td>{{this.nome_fornecedor}}</td>
+        <td>{{this.nome_produto}}</td>
+        <td>{{this.nome_armazen}}</td>
         <td>
-          <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+          <a href="#" style="text-decoration: none;color:brown;font-size:1.2rem">
             <i class="fa fa-trash"></i>
           </a>
         </td>
@@ -72,39 +105,7 @@
     </tbody>
   </table>
 </div>
-<div style="margin-top: 30px;">
 
-  <h3>Lista de contratos</h3>
-  <br>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">NIF</th>
-        <th scope="col">Produto</th>
-        <th scope="col">acções</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      {{#each fornecedores}}
-      <tr>
-        <th scope="row">{{this.id}}</th>
-        <td>{{this.nome}}</td>
-        <td>{{this.nif}}</td>
-        <td>{{this.produto}}</td>
-        <td>
-          <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
-            <i class="fa fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-      {{/each}}
-
-    </tbody>
-  </table>
-</div>
 <script>
   document.querySelector('#check-fornecedor')?.addEventListener('change', function (e) {
     const fornFiledsCheck = document.querySelectorAll('.fornecedor-field-ckeck')

@@ -6,15 +6,23 @@ const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
 
 const app = express();
-app.engine('handlebars', engine());
+app.engine('handlebars', engine({ defaultLayout: 'public-layout' }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/public')))
-app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+  if (req.url.startsWith('/admin/')) {
+    res.locals.layout = 'admin-layout';
+  } else {
+    res.locals.layout = 'public-layout';
+  }
+  next();
+});
 
-database().then(connction => {  
+database().then(connction => {
 
   consign({ cwd: path.join(process.cwd(), '/src') })
     .then('models')

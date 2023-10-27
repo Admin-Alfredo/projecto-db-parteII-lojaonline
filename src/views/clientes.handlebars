@@ -1,0 +1,16 @@
+<div class="container">
+  <h3>Criar uma conta</h3>
+  <form action="/clientes" method="POST">
+    <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
+        municipio, bairro, rua, numero de casa</strong></p>
+    <div class="d-flex" style="gap: 30px; margin: 30px 0px">
+      <input required type="text" name="nome" placeholder="nome " class="form-control fornecedor-field-ckeck">
+      <input required type="email" name="email" placeholder="email" class="form-control fornecedor-field-ckeck" />
+      <input required type="tel" name="telefone" placeholder="telefone" class="form-control fornecedor-field-ckeck" />
+      <input type="text" name="endereco" placeholder="pais, provincia, municipio, bairro, rua, numero de casa"
+        class="form-control w-100 fornecedor-field-ckeck">
+    </div>
+   
+    <button type="submit" class="site-btn">REGISTRAR</button>
+  </form>
+</div>

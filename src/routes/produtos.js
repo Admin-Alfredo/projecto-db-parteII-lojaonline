@@ -28,18 +28,19 @@ module.exports = (app, con) => {
       // return res.render('produtos', { title: "DASHBOARD / PRODUTO", produtos });
     } catch (error) {
       console.log(error.message)
-      return res.render('produtos', {  title: "DASHBOARD / PRODUTO", produtos });
+      return res.render('produtos', { title: "DASHBOARD / PRODUTO", produtos });
     }
   })
   // deletar um produto
   routerProdutos.get('/produtos/:id/delete', async (req, res) => {
-    const produtos = (await con.query("SELECT * FROM produto")).rows;
 
     try {
+      const produtos = (await con.query("SELECT * FROM produto")).rows;
       await con.query(`DELETE FROM produto WHERE id = '${req.params.id}'`)
       return res.redirect('/admin/produtos');
     } catch (error) {
-      return res.render('produtos', { error: error.message, produtos });
+      console.log("ERRO :", error.message)
+      return res.render('produtos', { title: 'DASHBOARD / ERRO ' + error.message });
     }
   })
   app.use('/admin', routerProdutos)

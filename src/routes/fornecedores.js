@@ -71,16 +71,17 @@ module.exports = (app, con) => {
       return res.render('fornecedores', { title: "DASHBOARD / ERRO", fornecedores })
     }
   })
-  // // deletar um produto
-  // routerFornecedores.get('/produtos/:id/delete', async (req, res) => {
-  //   const produtos = (await con.query("SELECT * FROM produto")).rows;
-
-  //   try {
-  //     await con.query(`DELETE FROM produto WHERE id = ${req.params.id}`)
-  //     return res.redirect('/admin/produtos');
-  //   } catch (error) {
-  //     return res.render('produtos', { error: error.message, produtos });
-  //   }
-  // })
+  // deletar um produto
+  routerFornecedores.get('/fornecedores/:id/delete', async (req, res) => {
+    const fornecedores = (await con.query("SELECT * FROM fornecedor")).rows;
+    console.log("DELETANDO O FORNECEDOR ---------")
+    try {
+      await con.query(`DELETE FROM fornecedor WHERE id ='${req.params.id}'`)
+      return res.redirect('/admin/fornecedores');
+    } catch (error) {
+      console.log(error.message)
+      return res.render('fornecedores', { title: "DASHBOARD / ERRO", fornecedores });
+    }
+  })
   app.use('/admin', routerFornecedores)
 }
