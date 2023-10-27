@@ -1,5 +1,5 @@
 <h3>Registrar novo fornecedor</h3>
-<form action="/admin/fornecedores" method="POST">
+<form action="/admin/fornecedores" method="POST" id="f-form">
 
   <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
       municipio, bairro, rua, numero de casa</strong></p>
@@ -10,7 +10,7 @@
       class="form-control w-100 fornecedor-field-ckeck">
   </div>
   <h4>Definir contrato para fornecedor</h4>
-  <label style="cursor:pointer;"> <span class="pr-2">usar fornecedor existente</span><input type="checkbox"
+  <label style="cursor:pointer;"> <span class="pr-2">usar fornecedor existente</span><input type="checkbox" name="check"
       id="check-fornecedor"></label>
   <p class="mt-2 p-2 alert alert-warning" role="alert"> Descrição -> Fornecedor -> Produto -> Armazen</strong></p>
 
@@ -39,7 +39,42 @@
 </form>
 <div style="margin-top: 30px;">
 
-  <h3>Lista de produtos</h3>
+  <h3>Lista dos fornecedores</h3>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">descricao</th>
+        <th scope="col">Data</th>
+        <th scope="col">Fornecedor</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Local de entrega</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each contratos}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.data}}</td>
+        <td>{{this.fornecedor}}</td>
+        <td>{{this.produto}}</td>
+        <td>{{this.armazen}}</td>
+        <td>
+          <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>
+<div style="margin-top: 30px;">
+
+  <h3>Lista de contratos</h3>
   <br>
   <table class="table table-striped">
     <thead>
@@ -47,6 +82,7 @@
         <th scope="col">#</th>
         <th scope="col">Nome</th>
         <th scope="col">NIF</th>
+        <th scope="col">Produto</th>
         <th scope="col">acções</th>
       </tr>
     </thead>
@@ -56,7 +92,8 @@
       <tr>
         <th scope="row">{{this.id}}</th>
         <td>{{this.nome}}</td>
-        <td>{{this.NIF}} Kzs</td>
+        <td>{{this.nif}}</td>
+        <td>{{this.produto}}</td>
         <td>
           <a href="/admin/fornecedores/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
             <i class="fa fa-trash"></i>
@@ -72,14 +109,17 @@
   document.querySelector('#check-fornecedor')?.addEventListener('change', function (e) {
     const fornFiledsCheck = document.querySelectorAll('.fornecedor-field-ckeck')
     const selectForn = document.querySelector('.select-forneceodr')
-    console.log(selectForn)
+    const fform = document.querySelector('#f-form')
+
     const currentTarget = e.currentTarget
     if (currentTarget.checked) {
       fornFiledsCheck.forEach((ffc) => ffc.setAttribute('disabled', 'true'))
       selectForn.removeAttribute('disabled')
+      fform.setAttribute('action', '/admin/fornecedores?f=true')
     } else {
       fornFiledsCheck.forEach((ffc) => ffc.removeAttribute('disabled'))
       selectForn.setAttribute('disabled', 'true')
+      fform.setAttribute('action', '/admin/fornecedores')
     }
   });
 

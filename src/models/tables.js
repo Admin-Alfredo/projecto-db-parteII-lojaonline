@@ -48,7 +48,7 @@ module.exports = async (app, con) => {
 
     await con.query(
       `CREATE TABLE IF NOT EXISTS itemencomendado (
-        id bigserial primary key ,
+        id VARCHAR(50) primary key ,
         produtoID VARCHAR(50) NOT NULL,
         encomendaID bigserial NOT NULL,
         quantidade INT default 0,
@@ -105,7 +105,7 @@ module.exports = async (app, con) => {
 
     await con.query(
       `CREATE TABLE IF NOT EXISTS fornecedor (
-        id bigserial primary key ,
+        id VARCHAR(50) primary key ,
         nome varchar(45) not null,
         enderecoID VARCHAR(50) not null,
         NIF varchar(45),
@@ -131,7 +131,7 @@ module.exports = async (app, con) => {
         id bigserial primary key ,
         descricao text,
         data date default CURRENT_DATE,
-        fornecedorID bigserial not null,
+        fornecedorID VARCHAR(50) not null,
         produtoID VARCHAR(50) not null,
         armazenID bigserial not null,
         constraint fk_fornecedor foreign key (fornecedorID) references fornecedor(id),

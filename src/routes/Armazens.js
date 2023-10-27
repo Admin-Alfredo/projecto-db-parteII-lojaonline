@@ -13,7 +13,7 @@ module.exports = (app, con) => {
         FROM "armazen"
         JOIN "endereco" ON "armazen"."enderecoid" = "endereco"."id";
       `)).rows;
-      console.log("RESULTADO ---> ", armazens)
+    
       return res.render('armazens', { title: "DASHBOARD / ARMAZEN", armazens })
 
     } catch (error) {
