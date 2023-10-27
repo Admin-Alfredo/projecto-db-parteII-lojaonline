@@ -39,7 +39,7 @@ module.exports = async (app, con) => {
     await con.query(
       `CREATE TABLE IF NOT EXISTS produto (
         id bigserial primary key,
-        nome varchar(45) not null,
+        nome varchar(45) not null UNIQUE,
         preco float NOT NULL default 0,
         quantidade INT default 0
       )`

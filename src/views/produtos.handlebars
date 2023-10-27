@@ -1,14 +1,47 @@
-<h3>registrar novo produto</h3>
-<form action="/produtos" method="POST">
+<h3>Registrar novo produto</h3>
+<form action="/admin/produtos" method="POST">
 
-  {{#if error}}
-    <p style="color: greenyellow;">produto regitrado com sucess</p>
+  {{#if message}}
+  <p style="color: greenyellow;">{{message}}</p>
   {{/if}}
   <div class="d-flex" style="gap: 30px; margin: 30px 0px">
-    <input type="text" name="nome" placeholder="nome do produto" class="form-control">
-    <input type="number" name="preco" placeholder="preço" class="form-control">
-    <input type="number" name="quantidade" placeholder="quantidade" class="form-control">
+    <input required type="text" name="nome" placeholder="nome do produto" class="form-control">
+    <input required type="number" name="preco" placeholder="preço" class="form-control">
+    <input required type="number" name="quantidade" placeholder="quantidade" class="form-control">
   </div>
 
   <button type="submit" class="site-btn">REGISTRAR</button>
 </form>
+<div style="margin-top: 30px;">
+
+  <h3>Lista de produtos</h3>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Preco</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">acções</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each produtos}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.nome}}</td>
+        <td>{{this.preco}} Kzs</td>
+        <td>{{this.quantidade}}</td>
+        <td>
+          <a href="/admin/produtos/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+          <i class="fa fa-trash" ></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>

@@ -13,16 +13,6 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  return res.render('home', { title: "DASHBOARD LOJA ONLINE" })
-})
-
-app.get('/produtos', (req, res) => {
-
-  return res.render('produtos', { title: "DASHBOARD LOJA ONLINE" })
-})
-
-
 
 database().then(connction => {
 
