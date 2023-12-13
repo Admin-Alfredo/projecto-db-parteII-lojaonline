@@ -3466,3 +3466,37 @@ ol {
 		font-size: 24px;
 	}
 }
+.popup_message {
+	padding: 20px 25px;
+	border-radius: 10px;
+	text-align: center;
+	
+	font-size: 1.2rem;
+	box-shadow: 0px 0.001rem 20px #555555d8;
+	transition: all ease .3s;
+	
+	position: fixed;
+	top: -100px;
+	right: 5%;
+}
+.popup_message.success{
+	background-color: #88fc80;
+	color: #093106;
+}
+.popup_message.error{
+	background-color: rgb(248, 83, 83);
+	color: #4f0909;
+}
+.popup_message.show{
+	top: 20px;
+	transition-delay: 0.4s;
+}
+
+.messages_errror_success_popup {
+	position: fixed;
+	top: 0;
+	width: 100wh;
+	height: auto;
+	background: transparent;
+	z-index: 9999;
+}

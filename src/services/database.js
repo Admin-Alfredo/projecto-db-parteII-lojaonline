@@ -2,8 +2,6 @@
 const { Client } = require('pg')
 module.exports = async () => {
 
-
-
   try {
     const client = new Client({
       user: 'postgres',

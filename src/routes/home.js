@@ -1,12 +1,12 @@
 module.exports = (app, con) => {
+  const { ProdutoRepository } = app.repositories;
   app.get('/', async (req, res) => {
     try {
-      const produtos = (await con.query("SELECT * FROM produto")).rows;
-      console.log(produtos)
-      return res.render('home', { title: "DASHBOARD / PRODUTOS", produtos })
+      const produtos = await ProdutoRepository.getAll();
+      return res.render('home', { title: "LOJAONLINE", produtos })
     } catch (error) {
-      console.log(error.message)
-      return res.render('home', { title: "HOME / ERRO" })
+      console.error("[ERRO]: ", error.message)
+      return res.redirect('/')
     }
 
   })

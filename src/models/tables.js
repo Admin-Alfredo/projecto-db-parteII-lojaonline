@@ -16,7 +16,7 @@ module.exports = async (app, con) => {
     console.log('table [endereco] criada com sucesso.')
     await con.query(
       `CREATE TABLE IF NOT EXISTS cliente (
-        id bigserial primary key ,
+        id varchar(50) primary key ,
         nome varchar(45) NOT NULL,
         email varchar(100) UNIQUE,
         telefone INT,
@@ -29,7 +29,7 @@ module.exports = async (app, con) => {
       `CREATE TABLE IF NOT EXISTS encomenda (
         id bigserial primary key ,
         data DATE default CURRENT_TIMESTAMP,
-        clienteID bigserial  NOT NULL,
+        clienteID varchar(50)  NOT NULL,
         estatus int default 0,
         constraint fk_cliente foreign key (clienteID) references cliente(id)
       )`
@@ -38,10 +38,7 @@ module.exports = async (app, con) => {
 
     await con.query(
       `CREATE TABLE IF NOT EXISTS produto (
-        id VARCHAR(50) primary key,
-        nome varchar(45) not null UNIQUE,
-        preco float default 0,
-        quantidade INT default 0
+        id VARCHAR(50) primary key
       )`
     )
     console.log('table [produto] criada com sucesso.')
@@ -49,7 +46,7 @@ module.exports = async (app, con) => {
     await con.query(
       `CREATE TABLE IF NOT EXISTS itemencomendado (
         id VARCHAR(50) primary key ,
-        produtoID VARCHAR(50) NOT NULL,
+        produtoID VARCHAR(50),
         encomendaID bigserial NOT NULL,
         quantidade INT default 0,
         constraint fk_produto foreign key (produtoID) references produto(id),
@@ -132,7 +129,7 @@ module.exports = async (app, con) => {
         descricao text,
         data date default CURRENT_DATE,
         fornecedorID VARCHAR(50) not null,
-        produtoID VARCHAR(50) not null,
+        produtoID VARCHAR(50),
         armazenID bigserial not null,
         constraint fk_fornecedor foreign key (fornecedorID) references fornecedor(id),
         constraint fk_produto foreign key (produtoID) references produto(id),
@@ -140,7 +137,7 @@ module.exports = async (app, con) => {
         
       )`
     )
-    
+
     // await con.query(`alter table contrato add constraint 
     //   fk_fornecedor foreign key (fornecedorID)  references fornecedor(id)`);
 
@@ -175,7 +172,7 @@ module.exports = async (app, con) => {
         id bigserial primary key ,
         metodopagamentoID bigserial not null,
         data date default CURRENT_TIMESTAMP,
-        clienteID bigserial not null,
+        clienteID varchar(50) not null,
         constraint fk_cliente foreign key (clienteID) references cliente(id),
         constraint fk_pagamento foreign key (metodopagamentoID) references pagamento(id)
 

@@ -1,6 +1,5 @@
 <h3>Registrar novo fornecedor</h3>
-<form action="/clientes" method="POST" id="f-form">
-
+<form action="/admin/fornecedores" method="POST" id="f-form">
   <p class="mt-2 p-2 alert alert-warning" role="alert">o formato do endereco de ser :<strong> pais, provincia,
       municipio, bairro, rua, numero de casa</strong></p>
   <div class="d-flex" style="gap: 30px; margin: 30px 0px">
@@ -124,4 +123,40 @@
     }
   });
 
+ window.onload = () => {
+     {{!-- const messages = parserMessageURL(location.search);
+    console.log(messages)
+    const handlerMessages = (msgCode) => {
+      const popup_message = document.createElement('div')
+      popup_message.classList.add('popup_message');
+      const messages_errror_success_popup = document.querySelector('.messages_errror_success_popup');
+      let mChildren;
+      mChildren = messages_errror_success_popup.children
+      if (msgCode.merr != null) {
+        popup_message.innerText = MESSAGES.errors.fornecedor[msgCode.merr]
+        popup_message.classList.add('error')
+        popup_message.style.top = (20 + mChildren.length * 100) + 'px';
+        messages_errror_success_popup.appendChild(popup_message)
+        popup_message.classList.add('show')
+        setTimeout(() => {
+          popup_message.classList.remove('show')
+        }, 10000)
+      }
+      mChildren = messages_errror_success_popup.children
+      if (msgCode.msuc != null) {
+        popup_message.innerText = MESSAGES.success.fornecedor[msgCode.msuc]
+        popup_message.classList.add('success')
+        popup_message.style.top = (20 + mChildren.length * 100) + 'px';
+        messages_errror_success_popup.appendChild(popup_message)
+        popup_message.classList.add('show')
+        setTimeout(() => {
+          popup_message.classList.remove('show')
+        }, 2000)
+      }
+    }
+    messages.forEach(handlerMessages) --}}
+
+
+
+  }
 </script>

@@ -2,46 +2,14 @@ const { v4: uuidv4 } = require('uuid')
 const express = require('express')
 module.exports = (app, con) => {
   const routerProdutos = express.Router()
+  const { ProdutoController } = app.controllers;
+  const { Middleware: { parseDataForUse } } = app.middlewares
 
-  // routerProdutos.get('/', (req, res) => {
-  //   return res.render('home', { title: "Administrador" })
-  // })
-
-  routerProdutos.get('/produtos', async (req, res) => {
-    const produtos = (await con.query("SELECT * FROM produto")).rows;
-    console.log(produtos)
-    return res.render('produtos', {
-      title: "DASHBOARD / PRODUTOS", produtos
-    })
-  })
+  routerProdutos.get('/produtos', ProdutoController.getAll);
+  routerProdutos.post('/produtos/create', parseDataForUse, ProdutoController.create);
+  routerProdutos.get('/produtos/delete/:id', ProdutoController.delete)
+  routerProdutos.get('/produtos/update/:id', ProdutoController.update)
 
 
-  routerProdutos.post('/produtos', async (req, res) => {
-    req.body.preco = parseFloat(req.body.preco);
-    req.body.quantidade = parseInt(req.body.quantidade)
-    console.log("CADASTRANDO PRODUTO ")
-    const produtos = []
-    try {
-      const produtoID = uuidv4()
-      await con.query(`INSERT INTO produto values ('${produtoID}', '${req.body.nome}', ${req.body.preco}, ${req.body.quantidade})`)
-      return res.redirect('/admin/produtos');
-      // return res.render('produtos', { title: "DASHBOARD / PRODUTO", produtos });
-    } catch (error) {
-      console.log(error.message)
-      return res.render('produtos', { title: "DASHBOARD / PRODUTO", produtos });
-    }
-  })
-  // deletar um produto
-  routerProdutos.get('/produtos/:id/delete', async (req, res) => {
-
-    try {
-      const produtos = (await con.query("SELECT * FROM produto")).rows;
-      await con.query(`DELETE FROM produto WHERE id = '${req.params.id}'`)
-      return res.redirect('/admin/produtos');
-    } catch (error) {
-      console.log("ERRO :", error.message)
-      return res.render('produtos', { title: 'DASHBOARD / ERRO ' + error.message });
-    }
-  })
   app.use('/admin', routerProdutos)
 }

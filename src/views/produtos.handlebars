@@ -1,10 +1,17 @@
 <h3>Registrar novo produto</h3>
-<form action="/admin/produtos" method="POST">
+<form action="/admin/produtos/create" method="POST">
 
   <div class="d-flex" style="gap: 30px; margin: 30px 0px">
     <input required type="text" name="nome" placeholder="nome do produto" class="form-control">
     <input required type="number" name="preco" placeholder="preço" class="form-control">
     <input required type="number" name="quantidade" placeholder="quantidade" class="form-control">
+    <select name="categoria">
+
+      <option value="Alimento">Alimento</option>
+      <option value="Electronico">Electronico</option>
+      <option value="Moves">Moves</option>
+      <option value="Roupa">Roupa</option>
+    </select>
   </div>
 
   <button type="submit" class="site-btn">REGISTRAR</button>
@@ -26,12 +33,12 @@
     <tbody>
       {{#each produtos}}
       <tr>
-        <th scope="row">{{this.id}}</th>
+        <th scope="row">{{this._id }}</th>
         <td>{{this.nome}}</td>
         <td>{{this.preco}} Kzs</td>
         <td>{{this.quantidade}}</td>
         <td>
-          <a href="/admin/produtos/{{this.id}}/delete" style="text-decoration: none;color:brown;font-size:1.2rem">
+          <a href="/admin/produtos/delete/{{this._id}}" style="text-decoration: none;color:brown;font-size:1.2rem">
             <i class="fa fa-trash"></i>
           </a>
         </td>
