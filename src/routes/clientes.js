@@ -13,7 +13,7 @@ module.exports = (app, con) => {
   routerAdminClientes.post('/', ClienteController.create);
   routerAdminClientes.get('/:id/delete', ClienteController.delete)
   routerAdminClientes.get('/:id',  ClienteController.getOne)
-
+  
   routerClientes.get('/:id',  ClienteController.getOne)
   app.get('/authenticate', ClienteController.authenticate)
   

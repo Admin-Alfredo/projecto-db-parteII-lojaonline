@@ -21,12 +21,11 @@ module.exports = (app, connection) => {
         FROM "contrato"
         JOIN "fornecedor" ON "contrato"."fornecedorid" = "fornecedor"."id"
         JOIN "produto" ON "contrato"."produtoid" = "produto"."id"
-        JOIN "armazen" ON "contrato"."armazenid" = "armazen"."id";
+        JOIN "armazen" ON "contrato"."armazenid" = "armazen"."id";  
     `)).rows;
       console.log("CONTRATOS ", contratos);
 
       return res.render('fornecedores', { title: "DASHBOARD / FORNECEDORES", fornecedores, produtos, armazens, contratos })
-
     } catch (error) {
       console.log(error.message)
       return res.render('fornecedores', { title: "DASHBOARD / ERRO", fornecedores })

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const ProdutoControllers = {};
   const { ProdutoRepository } = app.repositories;
-
+  
   ProdutoControllers.getAll = async (req, res) => {
     try {
       const produtos = await ProdutoRepository.getAll()

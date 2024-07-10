@@ -11,17 +11,15 @@ const generateOrGetAdminID = () => {
     fs.writeFileSync(filePath, JSON.stringify({ adminID }));
   }
   if (!adminID)
-    adminID = JSON.parse(fs.readFileSync(filePath)).adminID
-  return adminID
+    return JSON.parse(fs.readFileSync(filePath)).adminID
 }
 
-const ADMIN_ID = generateOrGetAdminID()
 module.exports = {
   config: {
     BASE_URL: 'http://localhost:5000/api',
     ALLOWRED_METHOD: ['GET', 'POST', 'DELETE', 'PUT', 'HEAD'],
     PORT: 5000,
-    ADMIN_ID
+    ADMIN_ID: generateOrGetAdminID()
   },
 
 }

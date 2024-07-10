@@ -29,8 +29,9 @@ module.exports = (app) => {
   }
   ClienteControllers.delete = async (req, res) => {
     try {
-      await con.query(`DELETE FROM cliente WHERE id = ${req.params.id}`)
-      return res.redirect('/clientes');
+      const response = await ClienteRepository.delete(req.params.id);
+      if (response) res.redirect('/clientes');
+      else res.redirect('/clientes?err=123')
     } catch (error) {
       console.error("[ERRO]: ", error.message)
       return res.redirect('/admin/clientes')
@@ -42,7 +43,7 @@ module.exports = (app) => {
   ClienteControllers.authenticate = async (req, res) => {
     const isSignup = typeof req.query.signup == 'string' ? true : false;
 
-    return res.render('public/authenticate', { title: "CADASTRAR", isSignup})
+    return res.render('public/authenticate', { title: "CADASTRAR", isSignup })
   }
   ClienteControllers.signin = (req, res) => {
     return res.render('public/signup', { title: "CADASTRAR" })
